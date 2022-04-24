@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <script>
+    let NewReviewID;
+    var selectedBookId = sessionStorage.getItem('selectedBookId');
+
+//This function will output all the messages from the ReviewsTBL in dynamoDB
+async function getMessages() {
+fetch( 'https://yxn35l0hi2.execute-api.eu-west-1.amazonaws.com/ReviewProject/review',  {
+method: 'GET'
+})
+.then(response => response.json())
+.then((response) => {
+        console.log(response.body);
+        response.body.forEach(data => {
+          if (data.BookID == selectedBookId)
+          {
+            document.getElementById("Reviews").innerHTML += "<p>"+data.Rating + " "+ data.Review + "</p>"; // Adds each message to div
+            NewReviewID = data.ReviewID + 1;
+          }
+        });
+});
+}
+
+async function getBooks() {
+fetch( 'https://yxn35l0hi2.execute-api.eu-west-1.amazonaws.com/ReviewProject/book',  {
+method: 'GET'
+})
+.then(response => response.json())
+.then((response) => {
+        console.log(response.body);
+        response.body.forEach(data => {
+            document.getElementById("Reviews").innerHTML += "<p>"+data.Title + " "+ data.Author + " " + data.Image + "</p>"; // Adds each message to div
+            NewReviewID = data.ReviewID + 1;
+        });
+});
+}
+
+//This will create a new item in the ReviewsTBL i already have stupid proofing done in the lambda to make sure that the items exist when they go to the lambda
+async function submitMessage() {
+    //This is set depending on the book that the review is being written on
+    var BookID = 2;
+
+    var Review = document.getElementById("Reviewinput").value;
+    var Rating = document.getElementById("Ratinginput").value;
+fetch( 'https://yxn35l0hi2.execute-api.eu-west-1.amazonaws.com/ReviewProject/review',  {
+        method: 'POST',
+        body: JSON.stringify({
+            "reviewid": NewReviewID,
+            "bookid": BookID,
+            "review": Review,
+            "rating": Rating
+        })
+})
+.then(response => response.json())
+.then((response) => {
+console.log(response);
+        document.getElementById("Reviews").innerHTML += "<p>"+Rating + " "+ Review + "</p>"; // Add new message to message list
+});
+}
+getMessages();
+  </script>
+
+<head>
+<title>Ghost Raptor Seduction</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+#main {margin-left: 120px}
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+img {
+  max-width: 100%
+  }
+  
+.image {
+  flex-basis: 60%
+  }
+
+.btn {
+  margin-left: 10%;
+}
+
+.raptor {
+  flex-basis: 100%
+}
+</style>
+</head>
+<body class="w3-black">
+
+<div class="w3-padding-large" id="main">
+  <div class="w3-content w3-justify w3-text-grey w3-padding-16" id="about">
+    <h2 class="w3-text-light-grey" id="bookTitle">Book Title</h2><br>
+    <h3 class="w3-text-light-grey">Reviews</h2>
+    <hr style="width:200px" class="w3-opacity">
+    
+    <strong>Messages from DynamoDB</strong>
+    <div id="Reviews"></div>
+
+
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css and Jesus</a></p>
+  </footer>
+</div>
+
+</body>
+<script>
+    var BookName = sessionStorage.getItem('BookName');
+
+    switch(BookName)
+    {
+        case "Ghost Raptor Seduction":
+        document.getElementById("bookTitle").innerHTML = "Ghost Raptor Seduction";
+        break;
+
+        case "The Bible":
+        document.getElementById("bookTitle").innerHTML = "The Bible";
+        break;
+
+        case "Fifty Shades Darker":
+        document.getElementById("bookTitle").innerHTML = "Fifty Shades Darker";
+        break;
+
+        case "Essential Judaism":
+        document.getElementById("bookTitle").innerHTML = "Essential Judaism";
+        break;
+    }
+</script>
+</html>

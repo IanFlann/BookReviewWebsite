@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Book Reviews</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+#main {margin-left: 120px}
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+* {
+  box-sizing: border-box;
+  font-family: "Courier New", serif;
+}
+
+.row {
+  display: flex;
+}
+
+/* Create three equal columns that sits next to each other */
+.column {
+  flex: 33.33%;
+  padding: 5px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+img {
+  max-width: 100%
+  }
+  
+.image {
+  flex-basis: 30%
+  }
+
+.btn {
+  margin-left: 10%;
+}
+
+.raptor {
+  flex-basis: 50%
+}
+</style>
+</head>
+<body class="w3-black">
+
+<div class="w3-padding-large" id="main">
+
+  <div class="w3-content w3-justify w3-text-grey w3-padding-16" id="about">
+    <h2 class="w3-text-light-grey">Books</h2>
+    <hr style="width:200px" class="w3-opacity">
+
+    <div class="container">
+      <div class="image">
+        <img src="essential.jpg">
+      </div>
+      <div class="text">
+        <h1>Essential Judaism<br> by George Robinson<br></h1>
+        <button onclick="location.href = 'reviewEJ.html';" class="btn">Send a Review!</button><br><br>
+        <button onclick="sessionStorage.setItem('BookName', 'Essential Judaism'), location.href = 'otherReviews.html', sessionStorage.setItem('selectedBookId', 2)" class="btn">See Other Reviews!</button>
+      </div>
+    </div>
+<br>
+    <div class="container">
+      <div class="image">
+        <img src="fifty-shades-darker.jpg" alt="Poorly Written Porn">
+      </div>
+      <div class="text">
+        <h1>Fifty Shades Darker<br> by E L James<br></h1>
+        <button class="btn" onclick="location.href = 'reviewFSD.html';">Send a Review!</button><br><br>
+        <button class="btn" onclick="sessionStorage.setItem('BookName', 'Fifty Shades Darker'), location.href = 'otherReviews.html', sessionStorage.setItem('selectedBookId', 3)">See Other Reviews!</button>
+      </div>
+    </div>
+<br>
+    <div class="container">
+      <div class="image">
+        <img src="bible.png" alt="DILF Magazine">
+      </div>
+      <div class="text">
+        <h1>The Catholic Bible<br> by Moses<br></h1>
+        <button class="btn" onclick="location.href = 'reviewBB.html';">Send a Review!</button><br><br>
+        <button class="btn" onclick="sessionStorage.setItem('BookName', 'The Bible'), location.href = 'otherReviews.html', sessionStorage.setItem('selectedBookId', 1)">See Other Reviews!</button>
+      </div>
+    </div>
+<br>
+    <div class="container">
+      <div class="image">
+        <img class="raptor" src="ghost-raptor-seduction.jpg" alt="What the Heck?">
+      </div>
+      <div class="text">
+        <h1>Ghost Raptor Seduction<br> by Eden Redd<br></h1>
+        <button class="btn" onclick="location.href = 'reviewGRS.html';">Send a Review!</button><br><br>
+        <button class="btn" onclick="sessionStorage.setItem('BookName', 'Ghost Raptor Seduction'), location.href = 'otherReviews.html', sessionStorage.setItem('selectedBookId', 4)">See Other Reviews!</button>
+      </div>
+    </div>
+
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css and Jesus</a></p>
+  </footer>
+</div>
+
+</body>
+
+<script>
+function SeeOtherReviews() {
+  
+}
+</script>
+</html>
